@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: face-verification-api
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python app.py
+    envVars:
+      - key: AWS_ACCESS_KEY_ID
+        value: your_access_key
+      - key: AWS_SECRET_ACCESS_KEY
+        value: your_secret_key
+      - key: AWS_REGION
+        value: us-east-1
+      - key: AWS_BUCKET_NAME
+        value: your_bucket_name
