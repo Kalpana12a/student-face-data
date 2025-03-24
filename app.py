@@ -6,7 +6,6 @@ import os
 from dotenv import load_dotenv
 from flask_cors import CORS
 from PIL import Image
-from deepface import DeepFace
 import cv2
 import numpy as np
 
@@ -68,17 +67,6 @@ def load_from_s3(filename):
     image = np.array(Image.open(in_mem_file))
     return cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
 
-# 🔁 Compare faces using DeepFace
-def compare_faces(stored_image, live_image):
-    try:
-        result = DeepFace.verify(
-            img1_path=stored_image,
-            img2_path=live_image,
-            enforce_detection=False
-        )
-        return {"verified": result["verified"]}
-    except Exception as e:
-        return {"verified": False, "error": str(e)}
 
 @app.route("/")
 def home():
